@@ -1,10 +1,25 @@
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { FaFacebook, FaGoogle, FaLinkedin } from 'react-icons/fa';
-const Register = () => {
-    const handleRegister =(event)=>{
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
+
+    const Register = () => {   
+        const {createUser} = useContext(AuthContext)
+
+    const handleRegister = (event) => {
         event.preventDefault()
-        console.log('asdsad')
+        const form = event.target
+        const name = form.name.value
+        const email = form.email.value
+        const password = form.password.value
+        console.log(name, email, password)
+        createUser(email, password)
+        .then(result=>{
+            const user = result.user
+            console.log(user)
+        })
+        .catch(error=> console.log(error))
     }
     return (
         <div className="hero min-h-screen ">
@@ -48,7 +63,7 @@ const Register = () => {
                                 <Link className='bg-zinc-200 p-2 rounded-full'><FaFacebook className='text-blue-700 w-6 h-6'></FaFacebook></Link>
                                 <Link className='bg-zinc-200 p-2 rounded-full'><FaLinkedin className='text-blue-500 w-6 h-6'></FaLinkedin></Link>
                                 <Link className='bg-zinc-200 p-2 rounded-full'><FaGoogle className='text-blue-600 w-6 h-6'></FaGoogle></Link>
-                               
+
                             </div>
                         </div>
                         <p className='text-center my-4'>Already have an account? <Link className='text-orange-600 font-semibold' to='/login'>Login</Link></p>
