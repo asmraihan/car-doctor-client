@@ -3,7 +3,7 @@ const Footer = () => {
     return (
         <footer className="text-center bg-zinc-900 text-neutral-200 lg:text-left">
             {/* Main container div: holds the entire content of the footer, including four sections (Tailwind Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. */}
-            <div className="py-20 text-left max-w-7xl mx-auto">
+            <div className="pt-16 pb-10 text-left w-5/6 mx-auto">
                 <div className="grid-1 grid gap-8 grid-cols-2 lg:grid-cols-4">
                     {/* Tailwind Elements section */}
                     <div className="lg:ml-10">
