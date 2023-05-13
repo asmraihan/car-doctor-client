@@ -6,7 +6,9 @@ const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => { 
+                
+            })
             .catch(error => console.log(error))
     }
     const navItems = <>
@@ -15,7 +17,7 @@ const NavBar = () => {
         {
             user?.email ? <>
                 <li><Link to='/bookings'>My Bookings</Link></li>
-                <li><button onClick={handleLogOut}>Logout</button></li>
+                <li><button className="btn text-white btn-error hover:btn-accent btn-sm normal-case p-2" onClick={handleLogOut}>Logout</button></li>
             </> : <li><Link to='/login'>Login</Link></li>
         }
     </>
@@ -35,7 +37,7 @@ const NavBar = () => {
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 font-semibold">
+                <ul className="menu menu-horizontal px-1 font-semibold items-center">
                     {navItems}
                 </ul>
             </div>

@@ -1,23 +1,29 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
-import { FaFacebook, FaGoogle, FaLinkedin } from 'react-icons/fa';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
     const Login = () => {
 
     const {signIn} = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/'
 
     const handleLogin =(event)=>{
         event.preventDefault()
         const form = event.target
         const email = form.email.value
         const password = form.password.value
-        console.log( email, password)
+        // console.log( email, password)
         signIn(email, password)
         .then(result=>{
             const user = result.user
+          
             console.log(user)
+            navigate(from, {replace: true})
+
         })
         .catch(error=> console.log(error))
     }
@@ -51,15 +57,7 @@ import { AuthContext } from '../../providers/AuthProvider';
                                 <input type="submit" value="Login" className="btn btn-accent" />
                             </div>
                         </form>
-                        <div>
-                            <p className='text-center my-4'>Or Sign in with</p>
-                            <div className='flex justify-center items-center gap-4'>
-                                <Link className='bg-zinc-200 p-2 rounded-full'><FaFacebook className='text-blue-700 w-6 h-6'></FaFacebook></Link>
-                                <Link className='bg-zinc-200 p-2 rounded-full'><FaLinkedin className='text-blue-500 w-6 h-6'></FaLinkedin></Link>
-                                <Link className='bg-zinc-200 p-2 rounded-full'><FaGoogle className='text-blue-600 w-6 h-6'></FaGoogle></Link>
-                               
-                            </div>
-                        </div>
+                       <SocialLogin></SocialLogin>
                         <p className='text-center my-4'>New to Car Doctors? <Link className='text-orange-600 font-semibold' to='/register'>Sign Up</Link></p>
                     </div>
                 </div>

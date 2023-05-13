@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
-import { FaFacebook, FaGoogle, FaLinkedin } from 'react-icons/fa';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
-    const Register = () => {   
-        const {createUser} = useContext(AuthContext)
+const Register = () => {
+    const { createUser } = useContext(AuthContext)
 
     const handleRegister = (event) => {
         event.preventDefault()
@@ -15,11 +15,11 @@ import { AuthContext } from '../../providers/AuthProvider';
         const password = form.password.value
         console.log(name, email, password)
         createUser(email, password)
-        .then(result=>{
-            const user = result.user
-            console.log(user)
-        })
-        .catch(error=> console.log(error))
+            .then(result => {
+                const user = result.user
+                console.log(user)
+            })
+            .catch(error => console.log(error))
     }
     return (
         <div className="hero min-h-screen ">
@@ -57,15 +57,7 @@ import { AuthContext } from '../../providers/AuthProvider';
                                 <input type="submit" value="Sign Up" className="btn btn-accent" />
                             </div>
                         </form>
-                        <div>
-                            <p className='text-center my-4'>Or Sign Up with</p>
-                            <div className='flex justify-center items-center gap-4'>
-                                <Link className='bg-zinc-200 p-2 rounded-full'><FaFacebook className='text-blue-700 w-6 h-6'></FaFacebook></Link>
-                                <Link className='bg-zinc-200 p-2 rounded-full'><FaLinkedin className='text-blue-500 w-6 h-6'></FaLinkedin></Link>
-                                <Link className='bg-zinc-200 p-2 rounded-full'><FaGoogle className='text-blue-600 w-6 h-6'></FaGoogle></Link>
-
-                            </div>
-                        </div>
+                        <SocialLogin></SocialLogin>
                         <p className='text-center my-4'>Already have an account? <Link className='text-orange-600 font-semibold' to='/login'>Login</Link></p>
                     </div>
                 </div>
